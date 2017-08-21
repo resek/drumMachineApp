@@ -1,4 +1,5 @@
 var squares = document.getElementsByClassName("squares");
+var soundsButtons = document.getElementsByClassName("soundsMode");
 var e = document.getElementById("e");   
 var r = document.getElementById("r");   
 var t = document.getElementById("t");   
@@ -7,7 +8,7 @@ var f = document.getElementById("f");
 var g = document.getElementById("g");   
 var c = document.getElementById("c");   
 var v = document.getElementById("v");   
-var b = document.getElementById("b");   
+var b = document.getElementById("b");  
 
 var data = {
     e: {
@@ -136,10 +137,10 @@ document.addEventListener("keyup", function(event) {
 
 
 
-
-
-
-
-
-
-
+for (var i = 0; i < soundsButtons.length; i++) {
+    soundsButtons[i].addEventListener("click", function(){
+        soundsButtons[0].classList.remove ("selected");
+        soundsButtons[1].classList.remove ("selected");
+        this.classList.add ("selected");        
+    });
+}

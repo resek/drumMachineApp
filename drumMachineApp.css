@@ -4,6 +4,11 @@
     box-sizing: border-box;
 }
 
+button {
+    float: left;
+    margin: 20px 0 0 20px;
+}
+
 .squares {
     width: 100px;
     height: 100px;
@@ -13,3 +18,8 @@
     margin-top: 10px;
     cursor: pointer;
 }
+
+.selected {
+    background: blue;
+}
+
