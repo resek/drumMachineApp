@@ -1,0 +1,15 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.squares {
+    width: 100px;
+    height: 100px;
+    background: blue;
+    float: left;
+    margin-left: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
