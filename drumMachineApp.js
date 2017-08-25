@@ -1,16 +1,7 @@
 var squares = document.getElementsByClassName("squares");
 var soundsButtons = document.getElementsByClassName("soundsMode");
-var e = document.getElementById("e");   
-var r = document.getElementById("r");   
-var t = document.getElementById("t");   
-var d = document.getElementById("d");   
-var f = document.getElementById("f");   
-var g = document.getElementById("g");   
-var c = document.getElementById("c");   
-var v = document.getElementById("v");   
-var b = document.getElementById("b");  
 
-var data = {
+var drumsData = {
     e: {
         sound: new Howl({
 				src: ['drumSounds/prac-kick.wav']
@@ -58,28 +49,110 @@ var data = {
     },
 }
 
-e.addEventListener("click", function(){data.e.sound.play();}, false);
-r.addEventListener("click", function(){data.r.sound.play();}, false);
-t.addEventListener("click", function(){data.t.sound.play();}, false);
-d.addEventListener("click", function(){data.d.sound.play();}, false);
-f.addEventListener("click", function(){data.f.sound.play();}, false);
-g.addEventListener("click", function(){data.g.sound.play();}, false);
-c.addEventListener("click", function(){data.c.sound.play();}, false);
-v.addEventListener("click", function(){data.v.sound.play();}, false);
-b.addEventListener("click", function(){data.b.sound.play();}, false);
+var weirdoData = {
+    e: {
+        sound: new Howl({
+				src: ['manSounds/cjipie.wav']
+			})
+    },
+    r: {
+        sound: new Howl({
+				src: ['manSounds/eh.wav']
+			})
+    },
+    t: {
+        sound: new Howl({
+				src: ['manSounds/houb.wav']
+			})
+    },
+    d: {
+        sound: new Howl({
+				src: ['manSounds/hruuhb.wav']
+			})
+    },
+    f: {
+        sound: new Howl({
+				src: ['manSounds/jah.wav']
+			})
+    },
+    g: {
+        sound: new Howl({
+				src: ['manSounds/oa-h.wav']
+			})
+    },
+    c: {
+        sound: new Howl({
+				src: ['manSounds/uhraa.wav']
+			})
+    },
+    v: {
+        sound: new Howl({
+				src: ['manSounds/uoh.wav']
+			})
+    },
+    b: {
+        sound: new Howl({
+				src: ['manSounds/uueh.wav']
+			})
+    },
+}
 
+checkSelection();
+
+//change background color & back on mouse click
 for (var i = 0; i < squares.length; i++) {
     squares[i].addEventListener("mousedown", function(){
         this.style.background = "red";
     });
 }
-
 for (var i = 0; i < squares.length; i++) {
     squares[i].addEventListener("mouseup", function(){
         this.style.background = "blue";
     });
 }
 
+//on click change selected button (drums / weirdo)
+for (var i = 0; i < soundsButtons.length; i++) {
+    soundsButtons[i].addEventListener("click", function(){
+        soundsButtons[0].classList.remove ("selected");
+        soundsButtons[1].classList.remove ("selected");
+        this.classList.add ("selected");        
+        checkSelection();
+    });
+}
+
+//play drums sounds for specific element / node from nodeList
+function drumsSounds(e) {
+    var properties = Object.values(drumsData);
+    var target = e.target;   
+    var index = Array.prototype.indexOf.call(squares, target);
+    properties[index].sound.play();
+}
+
+//play weirdo sounds for specific element / node from nodeList
+function weirdoSounds(e) {
+    var properties = Object.values(weirdoData);
+    var target = e.target;
+    var index = Array.prototype.indexOf.call(squares, target);
+    properties[index].sound.play();
+}
+
+//check for selected button & add event listeners for nodes
+function checkSelection () {        
+    for (var i = 0; i < squares.length; i++) {
+        if (soundsButtons[0].classList.contains("selected")) {                               
+            //play sound on mouse click for every div
+            squares[i].removeEventListener("click", weirdoSounds, false);
+            squares[i].addEventListener("click", drumsSounds, false);
+        } else if (soundsButtons[1].classList.contains("selected")) {
+            squares[i].removeEventListener("click", drumsSounds, false);
+            //play sound on mouse click for every div
+            squares[i].addEventListener("click", weirdoSounds, false);            
+        }
+    }
+}
+
+//play sound and change background color on keydown
 document.addEventListener("keydown", function(event) {
     event.preventDefault();
     if (event.keyCode === 69) {
@@ -112,6 +185,7 @@ document.addEventListener("keydown", function(event) {
     }
 }, false);
 
+//change background color back on keyup
 document.addEventListener("keyup", function(event) {
     event.preventDefault();
     if (event.keyCode === 69) {    
@@ -134,13 +208,3 @@ document.addEventListener("keyup", function(event) {
         b.style.background = "blue"; 
     }
 }, false);
-
-
-
-for (var i = 0; i < soundsButtons.length; i++) {
-    soundsButtons[i].addEventListener("click", function(){
-        soundsButtons[0].classList.remove ("selected");
-        soundsButtons[1].classList.remove ("selected");
-        this.classList.add ("selected");        
-    });
-}
