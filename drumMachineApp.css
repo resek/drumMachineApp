@@ -6,8 +6,14 @@
 
 button {
     float: left;
-    margin: 20px 0 0 20px;
+    margin-top: 20px;
 }
+
+button:nth-of-type(2n) {
+    margin-right: 10px;
+}
+
+
 
 .squares {
     width: 100px;
@@ -21,5 +27,10 @@ button {
 
 .selected {
     background: blue;
+}
+
+input {
+    float: left;
+    margin-top: 20px;
 }
 

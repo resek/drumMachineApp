@@ -1,6 +1,8 @@
 var squares = document.getElementsByClassName("squares");
 var soundsButtons = document.getElementsByClassName("soundsMode");
 var muteButtons = document.getElementsByClassName("muteMode");
+var volumeInput = document.querySelector("input");
+var volumeNum;
 
 var drumsData = {
     u: {
@@ -20,7 +22,7 @@ var drumsData = {
     },
     h: {
         sound: new Howl({
-				src: ['drumSounds/crispydinner.wav']
+				src: ['drumSounds/prac-snare-rim.wav']
 			})
     },
     j: {
@@ -98,9 +100,14 @@ var weirdoData = {
     },
 }
 
+checkMuteMode();                       
+
 //keyEvents
 window.addEventListener("keydown", keysSounds, false);
 window.addEventListener("keyup", backgroundBlue, false);
+
+//volume input listener
+volumeInput.addEventListener("blur", volumeChange, false);
 
 //squares click events
 for (var i = 0; i < squares.length; i++) {   
@@ -291,5 +298,19 @@ function clickBackgroundGreen() {
     }
 }
 
+function volumeChange() {
+    volumeNum = volumeInput.value;
+    for (var key in drumsData) { 
+        if (drumsData.hasOwnProperty(key)) {
+            drumsData[key].sound.volume(volumeNum);
+        } 
+    }    
+    for (var key in weirdoData) { 
+        if (weirdoData.hasOwnProperty(key)) {
+            weirdoData[key].sound.volume(volumeNum);
+        } 
+    }
+}
 
-// mute keydown to green (mogoce se nekako loop skozi switch); check for [0] to work without loop;
+
+//check for [0] to work without loop; kaj bi se se dal skrajsat;
