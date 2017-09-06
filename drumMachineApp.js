@@ -2,128 +2,34 @@ var squares = document.getElementsByClassName("squares");
 var soundsButtons = document.getElementsByClassName("soundsMode");
 var muteButtons = document.getElementsByClassName("muteMode");
 var volumeInput = document.querySelector("input");
+var screen = document.querySelector("#screen");
 var volumeNum;
 
-var drumsData = {
-    u: {
-        sound: new Howl({
-				src: ['drumSounds/prac-kick.wav']
-			})
-    },
-    i: {
-        sound: new Howl({
-				src: ['drumSounds/prac-perc-1.wav']
-			})
-    },
-    o: {
-        sound: new Howl({
-				src: ['drumSounds/prac-hat-3.wav']
-			})
-    },
-    h: {
-        sound: new Howl({
-				src: ['drumSounds/prac-snare-rim.wav']
-			})
-    },
-    j: {
-        sound: new Howl({
-				src: ['drumSounds/prac-ride-bell-loud.wav']
-			})
-    },
-    k: {
-        sound: new Howl({
-				src: ['drumSounds/prac-sidestick-2.wav']
-			})
-    },
-    b: {
-        sound: new Howl({
-				src: ['drumSounds/prac-snare-2.wav']
-			})
-    },
-    n: {
-        sound: new Howl({
-				src: ['drumSounds/prac-snare-rimshot.wav']
-			})
-    },
-    m: {
-        sound: new Howl({
-				src: ['drumSounds/prac-tom.wav']
-			})
-    },
-}
+checkMuteMode();
 
-var weirdoData = {
-    u: {
-        sound: new Howl({
-				src: ['manSounds/cjipie.wav']
-			})
-    },
-    i: {
-        sound: new Howl({
-				src: ['manSounds/eh.wav']
-			})
-    },
-    o: {
-        sound: new Howl({
-				src: ['manSounds/houb.wav']
-			})
-    },
-    h: {
-        sound: new Howl({
-				src: ['manSounds/hruuhb.wav']
-			})
-    },
-    j: {
-        sound: new Howl({
-				src: ['manSounds/jah.wav']
-			})
-    },
-    k: {
-        sound: new Howl({
-				src: ['manSounds/oa-h.wav']
-			})
-    },
-    b: {
-        sound: new Howl({
-				src: ['manSounds/uhraa.wav']
-			})
-    },
-    n: {
-        sound: new Howl({
-				src: ['manSounds/uoh.wav']
-			})
-    },
-    m: {
-        sound: new Howl({
-				src: ['manSounds/uueh.wav']
-			})
-    },
-}
-
-checkMuteMode();                       
-
-//keyEvents
+//key events
 window.addEventListener("keydown", keysSounds, false);
 window.addEventListener("keyup", backgroundBlue, false);
 
-//volume input listener
-volumeInput.addEventListener("blur", volumeChange, false);
-
-//squares click events
+//click events
 for (var i = 0; i < squares.length; i++) {   
     squares[i].addEventListener("click", clickSounds, false);
 }
+
+//volume input listeners
+volumeInput.addEventListener("change", volumeChange, false);
 
 //on click change selected button (drums / weirdo)
 for (var i = 0; i < soundsButtons.length; i++) {
     soundsButtons[i].addEventListener("click", function(){
         soundsButtons[0].classList.remove ("selected");
         soundsButtons[1].classList.remove ("selected");
-        this.classList.add ("selected");        
+        this.classList.add ("selected");
+        screen.textContent = "";        
     });
 }
 
-//on click change selected mute button (on / off)
+//on click change selected button (on / off)
 for (var i = 0; i < muteButtons.length; i++) {
     muteButtons[i].addEventListener("click", function(){
         muteButtons[0].classList.remove ("selected");
@@ -133,103 +39,132 @@ for (var i = 0; i < muteButtons.length; i++) {
     });
 }
 
-//select between drums / weirdo sounds and play correct sound for targeted element
+//select between drums / weirdo sounds and play correct sound for clicked element
 function clickSounds(e) {
-    var target, prop, index;
-    target = e.target;
-    for (var i = 0; i < soundsButtons.length; i++) {
-        if (soundsButtons[0].classList.contains("selected")) {
-            prop = Object.values(drumsData);
-        } else {
-        prop = Object.values(weirdoData);
-        }
+    var target, prop, index, options;
+    target = e.target;    
+    if (soundsButtons[0].classList.contains("selected")) {
+        prop = Object.values(drumsData);
+    } else {
+    prop = Object.values(weirdoData);
     }
     index = Array.prototype.indexOf.call(squares, target);
     prop[index].sound.play();
+    if (muteButtons[0].classList.contains("selected")) {
+        options = prop[index].sound._src.substring(11);
+        screen.textContent = options.substring(0, options.length - 4);
+    } else {
+        screen.textContent = "";
+    }    
 }
 
 //select between drums / weirdo sounds for keyEvents & switch between pressed keys
 function keysSounds (e) {
     var prop;
     e.preventDefault();    
-    for (var i = 0; i < soundsButtons.length; i++) {
-        if (soundsButtons[0].classList.contains("selected")) {
-            prop = Object.values(drumsData);
-        } else {
-        prop = Object.values(weirdoData);
-        }
-    }    
+    if (soundsButtons[0].classList.contains("selected")) {
+        prop = Object.values(drumsData);
+    } else {
+    prop = Object.values(weirdoData);
+    }        
     switch(e.code) {
         case "KeyU":
         prop[0].sound.play();
         if (muteButtons[0].classList.contains("selected")) {
             squares[0].style.background = "red";
+            options = prop[0].sound._src.substring(11);
+            screen.textContent = options.substring(0, options.length - 4);
         } else {
             squares[0].style.background = "green";
+            screen.textContent = "";
         }        
         break;
         case "KeyI":
         prop[1].sound.play();
         if (muteButtons[0].classList.contains("selected")) {
             squares[1].style.background = "red";
+            options = prop[1].sound._src.substring(11);
+            screen.textContent = options.substring(0, options.length - 4);           
         } else {
             squares[1].style.background = "green";
+            screen.textContent = "";
         }
         break;
         case "KeyO":
         prop[2].sound.play();
         if (muteButtons[0].classList.contains("selected")) {
             squares[2].style.background = "red";
+            options = prop[2].sound._src.substring(11);
+            screen.textContent = options.substring(0, options.length - 4);
         } else {
             squares[2].style.background = "green";
+            screen.textContent = "";
         }
         break;
         case "KeyH":
         prop[3].sound.play();
         if (muteButtons[0].classList.contains("selected")) {
             squares[3].style.background = "red";
+            options = prop[3].sound._src.substring(11);
+            screen.textContent = options.substring(0, options.length - 4);
         } else {
             squares[3].style.background = "green";
+            screen.textContent = "";
         }
         break;
         case "KeyJ":
         prop[4].sound.play();
         if (muteButtons[0].classList.contains("selected")) {
             squares[4].style.background = "red";
+            options = prop[4].sound._src.substring(11);
+            screen.textContent = options.substring(0, options.length - 4);
         } else {
             squares[4].style.background = "green";
+            screen.textContent = "";
         }
         break;
         case "KeyK":
         prop[5].sound.play();
         if (muteButtons[0].classList.contains("selected")) {
             squares[5].style.background = "red";
+            options = prop[5].sound._src.substring(11);
+            screen.textContent = options.substring(0, options.length - 4);
         } else {
             squares[5].style.background = "green";
+            screen.textContent = "";
         }
         break;
         case "KeyB":
         prop[6].sound.play();
         if (muteButtons[0].classList.contains("selected")) {
             squares[6].style.background = "red";
+            options = prop[6].sound._src.substring(11);
+            screen.textContent = options.substring(0, options.length - 4);
         } else {
             squares[6].style.background = "green";
+            screen.textContent = "";
         }
         break;
         case "KeyN":
         prop[7].sound.play();
         if (muteButtons[0].classList.contains("selected")) {
             squares[7].style.background = "red";
+            options = prop[7].sound._src.substring(11);
+            screen.textContent = options.substring(0, options.length - 4);
         } else {
             squares[7].style.background = "green";
+            screen.textContent = "";
         }
         break;
         case "KeyM":
         prop[8].sound.play();
         if (muteButtons[0].classList.contains("selected")) {
             squares[8].style.background = "red";
+            options = prop[8].sound._src.substring(11);
+            screen.textContent = options.substring(0, options.length - 4);
         } else {
             squares[8].style.background = "green";
+            screen.textContent = "";
         }
         break;       
     }
@@ -239,10 +174,12 @@ function keysSounds (e) {
 function checkMuteMode () {
     if (muteButtons[0].classList.contains("selected")) {
         muteFalse();
-        clickBackgroundRed();               
+        clickBackgroundRed();
+        screen.textContent = volumeInput.value * 100 + "%";              
     } else {
         muteTrue();
-        clickBackgroundGreen();        
+        clickBackgroundGreen();
+        screen.textContent = "";                 
     }
     backgroundBlue();                 
 }
@@ -250,12 +187,12 @@ function checkMuteMode () {
 function muteFalse() {
     for (var key in drumsData) {
         if (drumsData.hasOwnProperty(key)) {                
-            drumsData[key].sound.mute(false);        
+            drumsData[key].sound.mute(false);                    
         }
     }
     for (var key in weirdoData) {
         if (weirdoData.hasOwnProperty(key)) {               
-            weirdoData[key].sound.mute(false);       
+            weirdoData[key].sound.mute(false);                   
         }
     } 
 }
@@ -263,7 +200,7 @@ function muteFalse() {
 function muteTrue() {
     for (var key in drumsData) {
         if (drumsData.hasOwnProperty(key)) {
-            drumsData[key].sound.mute(true);        
+            drumsData[key].sound.mute(true);
         }
     }
     for (var key in weirdoData) {
@@ -277,7 +214,7 @@ function backgroundBlue() {
     for (var i = 0; i < squares.length; i++) {
         squares[i].style.background = "blue";
         squares[i].addEventListener("mouseup", function(){
-            this.style.background = "blue";
+            this.style.background = "blue"; 
         });    
     }
 }
@@ -298,7 +235,7 @@ function clickBackgroundGreen() {
     }
 }
 
-function volumeChange() {
+function volumeChange(e) {
     volumeNum = volumeInput.value;
     for (var key in drumsData) { 
         if (drumsData.hasOwnProperty(key)) {
@@ -310,7 +247,12 @@ function volumeChange() {
             weirdoData[key].sound.volume(volumeNum);
         } 
     }
+    showVolume(e);
 }
 
-
-//check for [0] to work without loop; kaj bi se se dal skrajsat;
+function showVolume(e) {
+    var target, sum;
+    target = e.target;
+    sum = target.value * 100;
+    screen.textContent = sum.toFixed(0) + "%";
+}
