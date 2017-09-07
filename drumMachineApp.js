@@ -9,12 +9,16 @@ checkMuteMode();
 
 //key events
 window.addEventListener("keydown", keysSounds, false);
-window.addEventListener("keyup", backgroundBlue, false);
+window.addEventListener("keyup", backgroundOrange, false);
 
 //click events
 for (var i = 0; i < squares.length; i++) {   
     squares[i].addEventListener("click", clickSounds, false);
+    squares[i].addEventListener("mousedown", function(e){ e.preventDefault(); }, false);
 }
+
+//prevent from selecting text with clicks
+screen.addEventListener("mousedown", function(e){ e.preventDefault(); }, false);
 
 //volume input listeners
 volumeInput.addEventListener("change", volumeChange, false);
@@ -175,13 +179,13 @@ function checkMuteMode () {
     if (muteButtons[0].classList.contains("selected")) {
         muteFalse();
         clickBackgroundRed();
-        screen.textContent = volumeInput.value * 100 + "%";              
+        screen.textContent = "Volume: " + Math.round(volumeInput.value * 100) + "%";              
     } else {
         muteTrue();
         clickBackgroundGreen();
         screen.textContent = "";                 
     }
-    backgroundBlue();                 
+    backgroundOrange();                 
 }
 
 function muteFalse() {
@@ -210,11 +214,11 @@ function muteTrue() {
     }
 }
 
-function backgroundBlue() {
+function backgroundOrange() {
     for (var i = 0; i < squares.length; i++) {
-        squares[i].style.background = "blue";
+        squares[i].style.background = "orange";
         squares[i].addEventListener("mouseup", function(){
-            this.style.background = "blue"; 
+            this.style.background = "orange"; 
         });    
     }
 }
@@ -253,6 +257,6 @@ function volumeChange(e) {
 function showVolume(e) {
     var target, sum;
     target = e.target;
-    sum = target.value * 100;
-    screen.textContent = sum.toFixed(0) + "%";
+    sum = Math.round(target.value * 100);
+    screen.textContent = "Volume: " + sum + "%";
 }

@@ -5,39 +5,86 @@
 }
 
 button {
-    float: left;
-    margin-top: 20px;
+    border: 1px solid black;
+    padding: 5px 10px;
+    outline: none;
+    background: white;
+    cursor: pointer;
 }
 
-button:nth-of-type(2n) {
-    margin-right: 10px;
+button:first-of-type {
+    margin-left: 5px;
+}
+
+button:nth-of-type(3) {
+    margin: 0 5px;
+}
+
+input {
+    cursor: pointer;
+    margin-left: 5px;
+    margin-top: 16px;
+    outline: none;
+}
+
+.containerOwn {
+    width: 330px;
+    margin: 0 auto;
+    height: 100%;
+    font-size: 120%;
+    font-weight: bold;
 }
 
 .squares {
     width: 100px;
     height: 100px;
-    background: blue;
     float: left;
-    margin-left: 10px;
-    margin-top: 10px;
+    margin: 5px;
     cursor: pointer;
+    text-align: center;
+    line-height: 100px;
+    border: 1px solid black;
 }
 
 .selected {
-    background: blue;
+    background: #7df46b;
 }
 
-input {
-    float: left;
-    margin-top: 20px;
+.volumeScreen {
+    margin: 20px 0;
+    height: 35px;
+
+}
+
+.modeButtons {
+    margin-top: 40px;
+}
+
+.muteMode {
+    float: right;
 }
 
 #screen {
-    float: left;
     border: 1px black solid;
-    margin-top: 20px;
-    margin-left: 10px;
-    width: 100px;
-    height: 30px;
+    width: 135px;
+    height: 35px;
+    float: right;
+    margin-right: 5px;
+    text-align: center;
+    line-height: 32px;
+    font-size: 90%;
 }
 
+input[type='range'] {
+    -webkit-appearance: none !important;
+    background: black;
+    height: 3px;
+    width: 160px;
+}
+input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    background:#7df46b;;
+    height:20px;
+    width:12px;
+    border: solid 1px black;
+}

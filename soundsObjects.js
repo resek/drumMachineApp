@@ -36,7 +36,7 @@ var drumsData = {
     },
     n: {
         sound: new Howl({
-				src: ['drumSounds/Prac-Snare-Rimshot.wav']
+				src: ['drumSounds/Prac-Rimshot.wav']
 			})
     },
     m: {
