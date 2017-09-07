@@ -75,99 +75,99 @@ function keysSounds (e) {
         case "KeyU":
         prop[0].sound.play();
         if (muteButtons[0].classList.contains("selected")) {
-            squares[0].style.background = "red";
+            squares[0].style.background = "#b70303";
             options = prop[0].sound._src.substring(11);
             screen.textContent = options.substring(0, options.length - 4);
         } else {
-            squares[0].style.background = "green";
+            squares[0].style.background = "#0f5e15";
             screen.textContent = "";
         }        
         break;
         case "KeyI":
         prop[1].sound.play();
         if (muteButtons[0].classList.contains("selected")) {
-            squares[1].style.background = "red";
+            squares[1].style.background = "#b70303";
             options = prop[1].sound._src.substring(11);
             screen.textContent = options.substring(0, options.length - 4);           
         } else {
-            squares[1].style.background = "green";
+            squares[1].style.background = "#0f5e15";
             screen.textContent = "";
         }
         break;
         case "KeyO":
         prop[2].sound.play();
         if (muteButtons[0].classList.contains("selected")) {
-            squares[2].style.background = "red";
+            squares[2].style.background = "#b70303";
             options = prop[2].sound._src.substring(11);
             screen.textContent = options.substring(0, options.length - 4);
         } else {
-            squares[2].style.background = "green";
+            squares[2].style.background = "#0f5e15";
             screen.textContent = "";
         }
         break;
         case "KeyH":
         prop[3].sound.play();
         if (muteButtons[0].classList.contains("selected")) {
-            squares[3].style.background = "red";
+            squares[3].style.background = "#b70303";
             options = prop[3].sound._src.substring(11);
             screen.textContent = options.substring(0, options.length - 4);
         } else {
-            squares[3].style.background = "green";
+            squares[3].style.background = "#0f5e15";
             screen.textContent = "";
         }
         break;
         case "KeyJ":
         prop[4].sound.play();
         if (muteButtons[0].classList.contains("selected")) {
-            squares[4].style.background = "red";
+            squares[4].style.background = "#b70303";
             options = prop[4].sound._src.substring(11);
             screen.textContent = options.substring(0, options.length - 4);
         } else {
-            squares[4].style.background = "green";
+            squares[4].style.background = "#0f5e15";
             screen.textContent = "";
         }
         break;
         case "KeyK":
         prop[5].sound.play();
         if (muteButtons[0].classList.contains("selected")) {
-            squares[5].style.background = "red";
+            squares[5].style.background = "#b70303";
             options = prop[5].sound._src.substring(11);
             screen.textContent = options.substring(0, options.length - 4);
         } else {
-            squares[5].style.background = "green";
+            squares[5].style.background = "#0f5e15";
             screen.textContent = "";
         }
         break;
         case "KeyB":
         prop[6].sound.play();
         if (muteButtons[0].classList.contains("selected")) {
-            squares[6].style.background = "red";
+            squares[6].style.background = "#b70303";
             options = prop[6].sound._src.substring(11);
             screen.textContent = options.substring(0, options.length - 4);
         } else {
-            squares[6].style.background = "green";
+            squares[6].style.background = "#0f5e15";
             screen.textContent = "";
         }
         break;
         case "KeyN":
         prop[7].sound.play();
         if (muteButtons[0].classList.contains("selected")) {
-            squares[7].style.background = "red";
+            squares[7].style.background = "#b70303";
             options = prop[7].sound._src.substring(11);
             screen.textContent = options.substring(0, options.length - 4);
         } else {
-            squares[7].style.background = "green";
+            squares[7].style.background = "#0f5e15";
             screen.textContent = "";
         }
         break;
         case "KeyM":
         prop[8].sound.play();
         if (muteButtons[0].classList.contains("selected")) {
-            squares[8].style.background = "red";
+            squares[8].style.background = "#b70303";
             options = prop[8].sound._src.substring(11);
             screen.textContent = options.substring(0, options.length - 4);
         } else {
-            squares[8].style.background = "green";
+            squares[8].style.background = "#0f5e15";
             screen.textContent = "";
         }
         break;       
@@ -216,9 +216,9 @@ function muteTrue() {
 
 function backgroundOrange() {
     for (var i = 0; i < squares.length; i++) {
-        squares[i].style.background = "orange";
+        squares[i].style.background = "#f9ba3e";
         squares[i].addEventListener("mouseup", function(){
-            this.style.background = "orange"; 
+            this.style.background = "#f9ba3e"; 
         });    
     }
 }
@@ -226,7 +226,7 @@ function backgroundOrange() {
 function clickBackgroundRed() {
     for (var i = 0; i < squares.length; i++) {
         squares[i].addEventListener("mousedown", function(){
-            this.style.background = "red";
+            this.style.background = "#b70303";
         });
     }
 }
@@ -234,7 +234,7 @@ function clickBackgroundRed() {
 function clickBackgroundGreen() {
     for (var i = 0; i < squares.length; i++) {
         squares[i].addEventListener("mousedown", function(){
-            this.style.background = "green";
+            this.style.background = "#0f5e15";
         });
     }
 }
