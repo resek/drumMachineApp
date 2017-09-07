@@ -16,7 +16,7 @@ var drumsData = {
     },
     h: {
         sound: new Howl({
-				src: ['drumSounds/Prac-Snare-Rim.wav']
+				src: ['drumSounds/Prac-Rim.wav']
 			})
     },
     j: {
