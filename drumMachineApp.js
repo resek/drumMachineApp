@@ -219,7 +219,10 @@ function backgroundOrange() {
         squares[i].style.background = "#f9ba3e";
         squares[i].addEventListener("mouseup", function(){
             this.style.background = "#f9ba3e"; 
-        });    
+        });
+        squares[i].addEventListener("touchend", function(){
+            this.style.background = "#f9ba3e"; 
+        });     
     }
 }
 
@@ -228,12 +231,18 @@ function clickBackgroundRed() {
         squares[i].addEventListener("mousedown", function(){
             this.style.background = "#b70303";
         });
+        squares[i].addEventListener("touchstart", function(){
+            this.style.background = "#b70303";
+        });
     }
 }
 
 function clickBackgroundGreen() {
     for (var i = 0; i < squares.length; i++) {
         squares[i].addEventListener("mousedown", function(){
+            this.style.background = "#0f5e15";
+        });
+        squares[i].addEventListener("touchstart", function(){
             this.style.background = "#0f5e15";
         });
     }
