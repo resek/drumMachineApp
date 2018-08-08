@@ -1,5 +1,5 @@
 # drumMachineApp
-drumMachineApp - you can play two collections of sounds (drums / dude). optimized for Chrome & Firefox (desktop / mobile).
+Vanilla JS for DOM manipulation and howler.js audio library
 
 https://soundsapp.netlify.com
 
